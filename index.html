@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>95 Lounge Menu</title>
+<style>
+ body { 
+  margin:0; 
+  font-family:Inter,system-ui,sans-serif; 
+  background-image: url("img/kal2.jpg"); /* fon rasmi yo‘lini yozamiz */
+  background-size: cover;      /* butun ekran bo‘ylab cho‘ziladi */
+  background-position: center; /* o‘rtadan joylashadi */
+  background-attachment: fixed; /* scroll qilinganda joyida turadi */
+  color: white; 
+}
+  .container { max-width:1100px; margin:auto; padding:16px; }
+  h1,h2 { color:var(--text);  font-family: 'Roboto', sans-serift; }
+  input { width:100%; padding:10px; border-radius:12px; border:none; background:#f1eeee; color:var(--text); font-size:16px; margin-bottom:16px; }
+  .filters { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
+  .filter { padding:8px 12px; border-radius:999px; background:#000000; color:#ffffff; cursor:pointer; transition:.2s; }
+  .filter:hover, .filter.active { background:var(--accent); color:#f5eded; }
+  .grid { display:grid; grid-template-columns:1fr; gap:16px; }
+  @media(min-width:700px){ .grid{ grid-template-columns:1fr 1fr; } }
+  .card { background:var(--card); border:1px solid var(--stroke); border-radius:var(--radius); overflow:hidden; display:flex; flex-direction:column; }
+  .card img { width:100%; height:200px; object-fit:cover; }
+  .content { padding:12px; display:flex; flex-direction:column; gap:8px; }
+  .title { font-weight:700; font-size:18px; }
+  .price { font-weight:800; color:var(--accent); }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>95 Lounge Menu </h1>
+  <input type="text" id="searchInput" placeholder="Qidiruv...">
+  
+  <div class="filters">
+    <span class="filter active" data-category="all">Hammasi</span>
+    <span class="filter" data-category="hookah">Hookah</span>
+    <span class="filter" data-category="drinks">Beverages</span>
+     <span class="filter" data-category="snacks">Snacks</span>
+  </div>
+
+  <div id="menu" class="grid">
+    <!-- Hookah items -->
+    <div class="card" data-category="hookah">
+      <img src="img/sebero musthave.jpg" alt="Classic Mix">
+      <div class="content">
+        <div class="title">Classic Mix</div>
+        <div class="price">150 000 so'm</div>
+        <div class="desc">Sebero, Musthave, Darkside</div>
+      </div>
+    </div>
+    <div class="card" data-category="hookah">
+      <img src="img/kalyan frukt.jpg" alt="Fruity Premium" width="50" height="50">
+      <div class="content">
+        <div class="title">Fruity Premium</div>
+        <div class="price">220   000 so'm</div>
+        <div class="desc">Ananas, Apelsin, Greyfurt</div>
+      </div>
+    </div>
+    <div class="card" data-category="hookah">
+      <img src="img/trofimotts.jpg" alt="Gold Mix" width="300" height="300">
+      <div class="content">
+        <div class="title">Gold Mix</div>
+        <div class="price">170 000 so'm</div>
+        <div class="desc">TrofimottsS</div>
+      </div>
+    </div>
+    <div class="card" data-category="hookah">
+      <img src="img/bonch tabak.jpg" alt="Premium">
+      <div class="content">
+        <div class="title">Premium</div>
+        <div class="price">200 000 so'm</div>
+        <div class="desc">Bonch kalyan tabak</div>
+      </div>
+    </div>
+
+    <!-- Drinks items -->
+    <div class="card" data-category="drinks">
+      <img src="img/tea.jpg" alt="TEA">
+      <div class="content">
+        <div class="title">Teas</div>
+      </div>
+         
+      <div class="content">
+        <img src="img/ahmad.jpg" alt="Tea">
+        <div class="title">Tea</div>
+        <div class="price">10 000 so'm</div>
+        <div class="desc">Ahmad Tea black and green</div>
+      </div>
+      <div class="content">
+        <img src="img/lemon.jpg" alt="Tea">
+        <div class="title">Tea with lemon</div>
+        <div class="price">20 000 so'm</div>
+        <div class="desc">Ahmad Tea black and green with lemon</div>
+      </div>
+      <div class="content">
+        <img src="img/fruit.jpg" alt="Tea">
+        <div class="title">Fruit Tea</div>
+        <div class="price">30 000 so'm</div>
+        <div class="desc">Ahmad Tea black and green</div>
+      </div>
+
+    </div>
+    <div class="card" data-category="drinks">
+      <img src="img/Soft drinks.jpg" alt="Soft drinks">
+      <div class="content">
+        <div class="title">Soft drinks</div>
+      </div>
+       <div class="content">
+        <img src="img/redbull.jpg" alt="Soft drinks">
+        <div class="title">Energy drinks</div>
+        <div class="price">25 000 so'm</div>
+        <div class="desc">Cold drinks (Red Bull and Adrenaline)</div>
+      </div>
+       <div class="content">
+        <img src="img/coca.jpg" alt="Soft drinks">
+        <div class="title">CocaCola</div>
+        <div class="price">25 000 so'm</div>
+        <div class="desc">Cold drinks</div>
+      </div>
+      <div class="content">
+        <img src="img/juice.jpg" alt="Soft drinks">
+        <div class="title">Juices</div>
+        <div class="price">25 000 so'm</div>
+        <div class="desc">Cold drinks</div>
+      </div>
+      <div class="content">
+        <img src="img/chortoq.jpg" alt="Soft drinks">
+        <div class="title">Sparkling water (Chortoq)</div>
+        <div class="price">15 000 so'm</div>
+        <div class="desc">Cold drinks</div>
+      </div>
+     
+    </div>
+    <!-- Snaks items -->
+<div class="card" data-category="snacks">
+      <img src="img/asarti.webp" alt="Snacks Mix">
+      <div class="content">
+        <div class="title">Snacks Mix</div>
+      </div>
+      <div class="content">
+        <img src="img/qurt1.jpg" alt="Snacks Mix">
+        <div class="title">Qurt</div>
+        <div class="price">20 000 so'm</div>
+        <div class="desc">Ermak (47 gr)</div>
+      </div>
+      <div class="content">
+        <img src="img/lays.png" alt="Snacks Mix">
+        <div class="title">Chips</div>
+        <div class="price">25 000 so'm</div>
+        <div class="desc">Lays</div>
+      </div>
+      <div class="content">
+        <img src="img/semichka.png" alt="Snacks Mix">
+        <div class="title">Semichka</div>
+        <div class="price">25 000 so'm</div>
+        <div class="desc">Ermak (200 gr)</div>
+      </div>
+       <div class="content">
+        <img src="img/pista.webp" alt="Snacks Mix">
+        <div class="title">Pista</div>
+        <div class="price">15 000 so'm</div>
+        <div class="desc">Ermak (50 gr)</div>
+      </div>
+       <div class="content">
+        <img src="img/mindall.jpg" alt="Snacks Mix">
+        <div class="title">Mindal</div>
+        <div class="price">15 000 so'm</div>
+        <div class="desc">Ermak (50 gr)</div>
+      </div>
+        <div class="content">
+        <img src="img/keshu.jpg" alt="Snacks Mix">
+        <div class="title">Keshu</div>
+        <div class="price">15 000 so'm</div>
+        <div class="desc">Ermak (50 gr)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const searchInput = document.getElementById('searchInput');
+const cards = document.querySelectorAll('#menu .card');
+const filters = document.querySelectorAll('.filter');
+
+searchInput.addEventListener('input', function() {
+  const query = this.value.toLowerCase();
+  cards.forEach(card => {
+    const text = card.innerText.toLowerCase();
+    card.style.display = text.includes(query) ? 'block' : 'none';
+  });
+});
+
+filters.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    filters.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const category = btn.dataset.category;
+    cards.forEach(card=>{
+      if(category==='all'||card.dataset.category===category){
+        card.style.display='block';
+      } else { card.style.display='none'; }
+    });
+  });
+});
+</script>
+<!-- Footer boshlanishi -->
+<footer style="margin-top:40px; border-top:1px solid #232327; padding:20px; text-align:center; color:#a7a7ad; font-size:14px;">
+  <div>
+    📞 <a href="tel:+998991119595" style="color:#f2f3f7; text-decoration:none;">+998 99 111 95 95</a>
+  </div>
+  <div>
+    📍 Manzil: Toshkent shahri, Sergeli tumani, Shokirariq 18 uy
+  </div>
+  <div style="margin-top:8px;">
+    📸 <a href="https://instagram.com/95_lounge" target="_blank" style="color:#f2f3f7; text-decoration:none;">Instagram</a> | 
+    💬 <a href="https://t.me/Lounge_95" target="_blank" style="color:#f2f3f7; text-decoration:none;">Telegram</a>
+  </div>
+  <div style="margin-top:8px; font-size:12px; color:#888;">© 2025</div>
+</footer>
+<!-- Footer tugadi -->
+
+</body>
+</html>
