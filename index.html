@@ -27,9 +27,9 @@
   .content { padding:12px; display:flex; flex-direction:column; gap:8px; }
   .title { font-weight:700; font-size:18px; }
   .price { font-weight:800; color:var(--accent); }
-  /* Admin panel asosiy qismi */
-#adminPanel {
-  display: none; /* boshida ko‘rinmasin */
+
+  #adminPanel {
+  display: none;
   position: fixed;
   top: 60px;
   right: 20px;
@@ -42,8 +42,7 @@
   z-index: 1000;
 }
 
-/* Inputlar ichidagi yozuv qora bo‘lsin */
-#adminPanel input {
+#adminPanel input, #adminPanel select {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
@@ -52,8 +51,6 @@
   font-size: 14px;
   color: #000;
 }
-
-/* Tugma */
 #toggleAdmin {
   position: fixed;
   top: 20px;
@@ -64,30 +61,51 @@
   border-radius: 50px;
   cursor: pointer;
   font-size: 14px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
 }
-#toggleAdmin:hover {
-  background: #333;
+.brandsContainer {
+  display: none;
+  background: rgba(3, 44, 8, 0.9);
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 10px;
+  color: #fff;
 }
 
-</style>
+.brandsContainer div {
+  font-weight: 700;
+  margin-top: 6px;
+  color: #fff;
+}
+
+.brandsContainer ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+.brandsContainer.show {
+  display: block;
+}
+
+
+  </style>
 </head>
 <body>
 <div class="container">
   <h1>95 Lounge Menu </h1>
   <input type="text" id="searchInput" placeholder="Qidiruv..."> 
-<!-- Admin tugma -->
- <a href="admin.html">Admin Panel</a>
-<div id="toggleAdmin">⚙️ Admin Panel</div>
-
 <!-- Admin panel -->
+ <div id="toggleAdmin">⚙️ Admin Panel</div>
 <div id="adminPanel">
   <h3>Yangi mahsulot qo‘shish</h3>
   <input type="text" id="productName" placeholder="Mahsulot nomi">
   <input type="text" id="productPrice" placeholder="Narxi">
   <input type="text" id="productDesc" placeholder="Tavsif">
+  <input type="text" id="productImg" placeholder="Rasm yo‘li (masalan: img/kalyan1.jpg)">
+  <select id="productCategory">
+    <option value="hookah">Hookah</option>
+    <option value="drinks">Beverages</option>
+    <option value="snacks">Snacks</option>
+  </select>
   <button onclick="addProduct()">➕ Qo‘shish</button>
 </div>
 
@@ -102,21 +120,31 @@
 
   <div id="menu" class="grid">
     <!-- Hookah items -->
-   <!-- Hookah items -->
-    <div class="card" data-category="hookah">
-      <img src="img/sebero musthave.jpg" alt="Classic Mix">
-      <div class="content">
-        <div class="title">Classic Mix</div>
-        <div class="price">150 000 so'm</div>
-        <div class="desc">Sebero, Musthave, Darkside</div>
-      </div>
+   <div id="hookahSection">
+  <div class="card" data-category="hookah">
+    <img src="img/sebero musthave.jpg" alt="Classic Mix">
+    <div class="content">
+      <div class="title">Classic Mix</div>
+      <div class="price">150 000 so'm</div>
+      <div class="desc">Sebero, Musthave, Darkside</div>
+      <button class="showBrandsBtn">Ko‘rish</button>
+
+      <!-- Brandlar ro'yxati -->
+      <div class="brandsContainer"></div>
     </div>
+  </div>
+</div>
+
     <div class="card" data-category="hookah">
-      <img src="img/kalyan frukt.jpg" alt="Fruity Premium" width="50" height="50">
+      <img src="img/kalyan frukt.jpg" alt="Fruity Premium" >
       <div class="content">
         <div class="title">Fruity Premium</div>
         <div class="price">220   000 so'm</div>
         <div class="desc">Ananas, Apelsin, Greyfurt</div>
+         <button class="showBrandsBtn">Ko‘rish</button>
+
+         <!-- Brandlar ro'yxati -->
+          <div class="brandsContainer"></div>
       </div>
     </div>
     <div class="card" data-category="hookah">
@@ -125,6 +153,10 @@
         <div class="title">Gold Mix</div>
         <div class="price">170 000 so'm</div>
         <div class="desc">TrofimottsS</div>
+        <button class="showBrandsBtn">Ko‘rish</button>
+
+        <!-- Brandlar ro'yxati -->
+          <div class="brandsContainer"></div>
       </div>
     </div>
     <div class="card" data-category="hookah">
@@ -133,6 +165,10 @@
         <div class="title">Premium</div>
         <div class="price">200 000 so'm</div>
         <div class="desc">Bonch kalyan tabak</div>
+        <button class="showBrandsBtn">Ko‘rish</button>
+
+        <!-- Brandlar ro'yxati -->
+          <div class="brandsContainer"></div>
       </div>
     </div>
 
@@ -265,7 +301,20 @@ filters.forEach(btn=>{
     });
   });
 });
-<!-- Admin panelni ochib-yopish -->
+
+function addProduct() {
+  const name = document.getElementById("productName").value;
+  const price = document.getElementById("productPrice").value;
+  const desc = document.getElementById("productDesc").value;
+  const img = document.getElementById("productImg").value;
+  const category = document.getElementById("productCategory").value;
+
+  if (!name || !price || !img) {
+    alert("Iltimos barcha maydonlarni to‘ldiring!");
+    return;
+  }
+
+}
 const toggleBtn = document.getElementById("toggleAdmin");
 const adminPanel = document.getElementById("adminPanel");
 
@@ -276,20 +325,89 @@ toggleBtn.addEventListener("click", () => {
     adminPanel.style.display = "none";
   }
 });
+  // Yangi kartani yaratish
+  const card = document.createElement("div");
+  card.className = "card";
+  card.setAttribute("data-category", category);
 
-// Yangi mahsulot qo‘shish (hozircha faqat console ga chiqadi)
-function addProduct() {
-  const name = document.getElementById("productName").value;
-  const price = document.getElementById("productPrice").value;
-  const desc = document.getElementById("productDesc").value;
+  card.innerHTML = `
+    <img src="${img}" alt="${name}">
+    <div class="content">
+      <div class="title">${name}</div>
+      <div class="price">${price}</div>
+      <div class="desc">${desc}</div>
+    </div>
+  `;
 
-  if (name && price) {
-    console.log("Yangi mahsulot:", {name, price, desc});
-    alert(`${name} qo‘shildi!`);
-  } else {
-    alert("Iltimos barcha maydonlarni to‘ldiring!");
+  // Tegishli bo‘limga qo‘shish
+  const menu = document.getElementById("menu");
+  menu.appendChild(card);
+
+  // Maydonlarni tozalash
+  document.getElementById("productName").value = "";
+  document.getElementById("productPrice").value = "";
+  document.getElementById("productDesc").value = "";
+  document.getElementById("productImg").value = "";
+
+  alert(`${name} qo‘shildi!`);
+
+</script>
+<script>
+// Har bir mix uchun tabak ma'lumotlari
+const hookahData = {
+  "Classic Mix": {
+    "Musthave": ["Tabak 1", "Tabak 2"],
+    "Sebero": ["Tabak 1", "Tabak 2"],
+    "Darkside": ["Tabak 1"]
+  },
+  "Fruity Premium": {
+    "Ananas": ["Tabak 1"],
+    "Apelsin": ["Tabak 1", "Tabak 2"],
+    "Greyfurt": ["Tabak 1"]
+  },
+  "Gold Mix": {
+    "Trofimotts": ["Tabak 1", "Tabak 2", "Tabak 3"]
+  },
+  "Premium": {
+    "Bonch": ["Tabak 1", "Tabak 2"]
   }
-}
+};
+
+// Barcha tugmalarni olish
+const showButtons = document.querySelectorAll(".showBrandsBtn");
+
+showButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const card = btn.closest(".card");
+    const brandContainer = card.querySelector(".brandsContainer");
+    const mixName = card.querySelector(".title").innerText;
+
+    brandContainer.innerHTML = ""; // tozalash
+
+    if (!brandContainer.classList.contains("show")) {
+      brandContainer.classList.add("show"); // ko'rsatish
+
+      const brands = hookahData[mixName];
+      for (let brand in brands) {
+        const brandTitle = document.createElement("div");
+        brandTitle.textContent = brand;
+        brandContainer.appendChild(brandTitle);
+
+        const ul = document.createElement("ul");
+        brands[brand].forEach(tabak => {
+          const li = document.createElement("li");
+          li.textContent = tabak;
+          ul.appendChild(li);
+        });
+        brandContainer.appendChild(ul);
+      }
+
+    } else {
+      brandContainer.classList.remove("show"); // yashirish
+    }
+  });
+});
+
 </script>
 
 <!-- Footer boshlanishi -->
@@ -298,7 +416,8 @@ function addProduct() {
     📞 <a href="tel:+998991119595" style="color:#f2f3f7; text-decoration:none;">+998 99 111 95 95</a>
   </div>
   <div>
-    <a href="Manzil: Toshkent shahri, Sergeli tumani, Shokirariq 18 uy" style="color: #f1eeee; text-decoration:none;">Manzil: Toshkent shahri, Sergeli tumani, Shokirariq 18 uy</a>
+    <a href="Manzil: Toshkent shahri, Sergeli tumani, Shokirariq 18 uy" style="color: #f1eeee; text-decoration:none;">📍Manzil: Toshkent shahri, Sergeli tumani, Shokirariq 18 uy</a>
+   
   </div>
   <div style="margin-top:8px;">
     📸 <a href="https://instagram.com/95_lounge" target="_blank" style="color:#f2f3f7; text-decoration:none;">Instagram</a> | 
