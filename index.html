@@ -28,39 +28,49 @@
   .title { font-weight:700; font-size:18px; }
   .price { font-weight:800; color:var(--accent); }
 
-  #adminPanel {
-  display: none;
-  position: fixed;
-  top: 60px;
-  right: 20px;
-  width: 300px;
-  background: #fff;
-  color: #000;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  z-index: 1000;
+  /* Admin panelni tepada joylashtirish va scroll bilan birga qolishi */
+#adminPanel {
+    display: none; /* boshida yashirin */
+    position: fixed; /* scroll bilan birga tepada qoladi */
+    top: 20px;      /* tepadan 20px masofa */
+    right: 20px;    /* o‘ngdan 20px masofa */
+    width: 300px;   /* kengligi */
+    background: #111; /* fon rangi */
+    color: #fff;      /* matn rangi */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 1000;   /* boshqa elementlar ustida bo‘lishi uchun */
+}
+  /* Input ichidagi yozuvlar qora rangda bo‘lsin */
+#adminPanel input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    color: #000;
 }
 
-#adminPanel input, #adminPanel select {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-  color: #000;
-}
+/* Admin panelni ochish tugmasi */
 #toggleAdmin {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: #000;
-  color: #fff;
-  padding: 10px 16px;
-  border-radius: 50px;
-  cursor: pointer;
-  font-size: 14px;
+    position: fixed;  /* tepada qotib turadi */
+    top: 20px;
+    right: 20px;
+    background: #000;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 1001; /* paneldan ustida bo‘lishi uchun */
+}
+#toggleAdmin:hover {
+    background: #333;
 }
 .brandsContainer {
   display: none;
@@ -85,8 +95,6 @@
 .brandsContainer.show {
   display: block;
 }
-
-
   </style>
 </head>
 <body>
@@ -134,7 +142,7 @@
     </div>
   </div>
 </div>
-
+<section class="section1">
     <div class="card" data-category="hookah">
       <img src="img/kalyan frukt.jpg" alt="Fruity Premium" >
       <div class="content">
@@ -171,8 +179,10 @@
           <div class="brandsContainer"></div>
       </div>
     </div>
+</section>
 
     <!-- Drinks items -->
+     <section class="ichimliklar">
     <div class="card" data-category="drinks">
       <img src="img/tea.jpg" alt="TEA">
       <div class="content">
@@ -230,7 +240,9 @@
       </div>
      
     </div>
+    </section>
     <!-- Snaks items -->
+     <section class="snacks">
 <div class="card" data-category="snacks">
       <img src="img/asarti.webp" alt="Snacks Mix">
       <div class="content">
@@ -275,7 +287,7 @@
     </div>
   </div>
 </div>
-
+</section>
 <script>
 const searchInput = document.getElementById('searchInput');
 const cards = document.querySelectorAll('#menu .card');
